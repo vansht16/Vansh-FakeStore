@@ -4,9 +4,9 @@ import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
 const SplashScreen = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.navigate("Categories");
+      navigation.navigate("Main");
     }, 1500);
-  }, []);
+  }, [navigation]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#ffe6e6", // Different background color
+    backgroundColor: "#ffe6e6",
   },
   imgContainer: {
     alignItems: "center",

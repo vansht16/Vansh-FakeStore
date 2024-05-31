@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f0f5f5", // Different background color
+    backgroundColor: "#f0f5f5",
   },
   title: {
     fontSize: 24,
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     color: "#888",
   },
   backButton: {
-    backgroundColor: "#4da6ff", // Different button color
+    backgroundColor: "#4da6ff",
     padding: 10,
     marginTop: 20,
     borderRadius: 10,

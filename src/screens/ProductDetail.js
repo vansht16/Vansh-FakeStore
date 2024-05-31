@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, Text, View, SafeAreaView, Image, ScrollView, TouchableOpacity, ActivityIndicator } from "react-native";
+import { useDispatch } from 'react-redux';
+import { addItemToCart } from '../store/cartSlice';
 
 const ProductDetail = ({ navigation, route }) => {
   const [loading, setLoading] = useState(true);
   const [product, setProduct] = useState({});
   const { product: selectedProduct } = route.params;
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setProduct(selectedProduct);
@@ -33,7 +36,7 @@ const ProductDetail = ({ navigation, route }) => {
         <TouchableOpacity style={styles.btn} onPress={() => navigation.goBack()}>
           <Text style={styles.btnText}>Back</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.btn}>
+        <TouchableOpacity style={styles.btn} onPress={() => dispatch(addItemToCart(product))}>
           <Text style={styles.btnText}>Add to Cart</Text>
         </TouchableOpacity>
       </View>
@@ -46,7 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#f2f2f2", // Different background color
+    backgroundColor: "#f2f2f2",
   },
   title: {
     fontSize: 24,
@@ -94,7 +97,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     width: "100%",
     padding: 20,
-    backgroundColor: "#4da6ff", // Different background color
+    backgroundColor: "#4da6ff",
   },
   btn: {
     backgroundColor: "#fff",

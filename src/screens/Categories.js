@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#e6f2ff", // Different background color
+    backgroundColor: "#e6f2ff",
   },
   title: {
     fontSize: 24,
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     width: "80%",
   },
   categoryButton: {
-    backgroundColor: "#4da6ff", // Different button color
+    backgroundColor: "#4da6ff",
     padding: 15,
     marginVertical: 10,
     borderRadius: 10,
