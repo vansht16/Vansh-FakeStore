@@ -6,7 +6,7 @@ import { View, Text } from 'react-native';
 
 const ShoppingCartTab = ({ color, size }) => {
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
-
+// final submission 
   return (
     <View style={{ width: 24, height: 24, margin: 5 }}>
       <Ionicons name="md-cart" color={color} size={size} />
