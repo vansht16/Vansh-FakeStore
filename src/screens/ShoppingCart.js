@@ -1,13 +1,27 @@
+// src/screens/ShoppingCart.js
 import React from 'react';
-import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, SafeAreaView, FlatList, TouchableOpacity, Image, Alert } from 'react-native';
 import { useSelector, useDispatch } from 'react-redux';
-import { removeItemFromCart, addItemToCart } from '../store/cartSlice';
+import { removeItemFromCart, addItemToCart, clearCart } from '../store/cartSlice';
+import { createOrder } from '../store/orderSlice';
 
-const ShoppingCart = () => {
+const ShoppingCart = ({ navigation }) => {
   const cartItems = useSelector((state) => state.cart.items);
   const totalQuantity = useSelector((state) => state.cart.totalQuantity);
   const totalAmount = useSelector((state) => state.cart.totalAmount);
   const dispatch = useDispatch();
+
+  const handleCheckout = () => {
+    if (cartItems.length === 0) {
+      Alert.alert('Error', 'Your cart is empty');
+      return;
+    }
+    const orderId = Date.now().toString(); // Simple unique order ID using timestamp
+    dispatch(createOrder({ id: orderId, items: cartItems, totalAmount }));
+    dispatch(clearCart());
+    Alert.alert('Order Created', `Your order ID is ${orderId}`);
+    navigation.navigate('MyOrders');
+  };
 
   const renderCartItem = ({ item }) => (
     <View style={styles.cartItem}>
@@ -49,6 +63,9 @@ const ShoppingCart = () => {
             renderItem={renderCartItem}
             keyExtractor={(item) => item.id.toString()}
           />
+          <TouchableOpacity style={styles.checkoutButton} onPress={handleCheckout}>
+            <Text style={styles.checkoutButtonText}>Check Out</Text>
+          </TouchableOpacity>
         </>
       )}
     </SafeAreaView>
@@ -114,6 +131,17 @@ const styles = StyleSheet.create({
   quantityButtonText: {
     color: '#fff',
     fontSize: 16,
+  },
+  checkoutButton: {
+    backgroundColor: '#4da6ff',
+    padding: 10,
+    borderRadius: 10,
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  checkoutButtonText: {
+    color: '#fff',
+    fontSize: 18,
   },
 });
 
